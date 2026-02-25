@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 app.register_blueprint(api_bp)
 
-Base.metadata.create_all(bind=engine)
+#Base.metadata.create_all(bind=engine)
 
 
 @app.teardown_appcontext

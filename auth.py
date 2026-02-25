@@ -1,6 +1,6 @@
 from flask import request, Response, jsonify
 from functools import wraps
-from database import session
+from database import Session
 from todo_db import User
 
 
@@ -13,7 +13,7 @@ def authenticate():
 
 
 def check_auth(username, password):
-    user = session.query(User).filter_by(username=username).first()
+    user = Session.query(User).filter_by(username=username).first()
     if user and user.check_password(password):
         return user
     return None

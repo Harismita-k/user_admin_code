@@ -13,9 +13,14 @@ def authenticate():
 
 
 def check_auth(username, password):
-    user = Session.query(User).filter_by(username=username).first()
+    session = Session()
+    user = session.query(User).filter_by(username=username).first()
+
     if user and user.check_password(password):
+        session.close()
         return user
+
+    session.close()
     return None
 
 
@@ -28,6 +33,7 @@ def basic_auth_required(f):
             return authenticate()
 
         user = check_auth(auth.username, auth.password)
+
         if not user:
             return authenticate()
 
@@ -45,6 +51,7 @@ def admin_required(f):
             return authenticate()
 
         user = check_auth(auth.username, auth.password)
+
         if not user:
             return authenticate()
 

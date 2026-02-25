@@ -63,9 +63,10 @@ def get_user_todos(current_user):
 def get_all_todos(current_user):
     session = Session()
 
+
     todos = session.query(Todo).all()
 
-    return jsonify([
+    return jsonify([ 
         {
             "id": t.id,
             "task": t.task,
